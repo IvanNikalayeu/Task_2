@@ -1,7 +1,7 @@
 import pandas as pd
-import numpy as np
 
-df = pd.read_csv('C:/users/07108/OneDrive - VEKA/Документы/GitHub/pandas_numpy_tasks/data/adult.data.csv')
+
+df = pd.read_csv('data/adult.data.csv')
 # print(df.head())
 df = df.rename(columns={
     'education-num' : 'education_num',
