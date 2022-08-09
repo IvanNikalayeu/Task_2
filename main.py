@@ -170,7 +170,14 @@ df = df.rename(columns={
 # в которых средний возраст (колонка age) не больше 40 и в которых все работники отрабатывают
 # более 5 часов в неделю (колонка hours-per-week)
 
-gr_occupation = df.groupby('occupation').agg({'age' : 'count'})
-print(type(gr_occupation))
+gr_occupation = df.groupby('occupation', as_index=False).agg({'age' : 'count'}).rename(columns={'age' : 'num_pers'})
+print(gr_occupation)
+def filter_func (df):
+    grouping_df = df.groupby('occupation', as_index=False).agg({'age' : 'mean', 'hours_per_week' : 'min'}).rename(columns={'age' : 'avg_age', 'hours_per_week' : 'min_hours_per_week'})
+    print(grouping_df)
+    res_filter = grouping_df.query('avg_age <= 40 and min_hours_per_week > 5')
+    print(res_filter)
+    return res_filter
 
+filter_func(df)
 
