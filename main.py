@@ -145,8 +145,32 @@ df = df.rename(columns={
 #       adult - 35-70 лет
 #       retiree - 70-100 лет
 #   Проставьте название соответсвтуещей группы для каждого человека в новой колонке AgeGroup
+#
+# gr_young = df.query('age >= 16 and age < 35')
+# gr_young.insert(15, 'AgeGroup', 'young')
+# gr_adult = df.query('age >= 35 and age < 70')
+# gr_adult.insert(15, 'AgeGroup', 'adult')
+# gr_retiree = df.query('age >= 70 and age < 100')
+# gr_retiree.insert(15, 'AgeGroup', 'retiree')
+#
+# df_sort = pd.concat([gr_young,gr_adult, gr_retiree], sort=False, axis=0)
+# print(df_sort)
+#
+# # 12. Определите количество зарабатывающих >50K в каждой из возрастных групп (колонка AgeGroup),
+# # а также выведите название возрастной группы, в которой чаще зарабатывают больше 50К (>50K)
+#
+# num_gr_more = df_sort.query('salary == ">50K"').groupby('AgeGroup').agg({'age' : 'count'})
+# num_gr_total = df_sort.groupby('AgeGroup').agg({'age' : 'count'})
+# a_test = (num_gr_more['age'] / num_gr_total['age'])
+# print(a_test[a_test == a_test.max()])
 
 
+# 13. Сгруппируйте людей по типу занятости (колонка occupation) и определите количество людей в каждой группе.
+# После чего напишите функцию фильтрации filter_func, которая будет возвращать только те группы,
+# в которых средний возраст (колонка age) не больше 40 и в которых все работники отрабатывают
+# более 5 часов в неделю (колонка hours-per-week)
 
+gr_occupation = df.groupby('occupation').agg({'age' : 'count'})
+print(type(gr_occupation))
 
 
